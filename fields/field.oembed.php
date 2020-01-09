@@ -565,7 +565,9 @@
 			$isUniqueMedia = $this->get('unique_media') == 'yes';
 
 			$value = General::sanitize($data['url']);
-			$label = Widget::Label($this->get('label'));
+			$label = Widget::Label();
+			$span = new XMLElement('span', $this->get('label'));
+			$label->appendChild($span);
 
 			// not required and unique label
 			if(!$isRequired && $isUniqueMedia) {
@@ -598,8 +600,9 @@
 				$driverlinks[] = $driverlink->generate();
 			}
 
-			$drivers = new XMLElement('div',
-				__('Supported services: ') . implode(', ', $driverlinks)
+			$drivers = new XMLElement('p',
+				__('Supported services: ') . implode(', ', $driverlinks),
+				array('class' => 'help')
 			);
 
 			if (strlen($value) == 0 || $flagWithError != null) {
@@ -650,18 +653,19 @@
 				$label->appendChild($res_container);
 			}
 
-			// append the input tag into the label
-			$label->appendChild($url);
+
 
 			// append the allowed drivers list
 			$label->appendChild($drivers);
 
 			// error management
 			if($flagWithError != null) {
-				$wrapper->appendChild(Widget::Error($label, $flagWithError));
-			} else {
-				$wrapper->appendChild($label);
+				$label = Widget::Error($label, $flagWithError);
 			}
+
+			$wrapper->appendChild($label);
+			$wrapper->appendChild($url);
+
 		}
 
 		/**
@@ -920,7 +924,7 @@
 					],
 					'driver' => [
 						'type' => 'varchar(50)',
-						'null' => auto,
+						'null' => 'auto',
 					],
 				])
 				->keys([
