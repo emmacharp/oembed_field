@@ -9,51 +9,30 @@
  * @author nicolas
  */
 
-div.compact label.oembed-other-title {
-	width: calc(100% - 3rem);
-	margin: 0 0 0 3rem;
-}
-
-.field-oembed label > div {
-	margin-top: 2px;
-}
-
-.field-oembed label .frame {
+.field-oembed .frame {
+	margin: var(--standard-inner-rhythm);
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
+	padding: var(--standard-inner-rhythm);
+	border: 1px dashed var(--color-ui);
 }
 
-.field-oembed label .frame > span {
-	display: none;
+.field-oembed input.irrelevant~.frame {
+	margin-top: calc(var(--compensate-for-inner-field-label) + var(--standard-inner-rhythm));
 }
 
-.field-oembed label .frame > div {
-	order: 99;
-	flex-shrink: 0;
-	width: 100%;
+.field-oembed .frame>*+* {
+	margin-top: var(--standard-inner-rhythm);
+}
+.field-oembed .frame>div {
+	display: flex;
+	align-items: baseline;
+}
+.field-oembed:not(:hover) .frame>div {
+	opacity: 0;
 }
 
-.field-oembed label .frame > a {
-	border-radius: 5px;
-	color: #fff;
-	font-size: 1.1rem;
-	font-style: normal;
-	text-transform: uppercase;
-	line-height: 1.6rem;
-	margin-bottom: 1rem;
-	padding: 0.5rem 1rem;
-	border: none;
-	background: #2f77eb;
-	cursor: pointer;
-}
-
-.field-oembed label .frame > a:hover {
-	background: #3B3D40;
-}
-
-.field-oembed label .frame > a + span + a {
-	margin-left: 1rem;
+.field-oembed .frame>div>*+* {
+	margin-left: var(--spacing-micro);
 }

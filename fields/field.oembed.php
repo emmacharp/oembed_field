@@ -619,13 +619,15 @@
 				$res_container = new XMLElement('span');
 				$res_container->setAttribute('class', 'frame');
 
-				$change = new XMLElement('a', __('Change'));
-				$change->setAttribute('class', 'change');
+				$change = new XMLElement('span', __('Change'));
+				$change->setAttribute('class', 'change button');
 
 				$or = new XMLElement('span', __(' or '));
 
-				$remove = new XMLElement('a', __('Remove'));
-				$remove->setAttribute('class', 'change remove');
+				$remove = new XMLElement('span', __('Remove'));
+				$remove->setAttribute('class', 'change remove button');
+
+				$controls = new XMLElement('div');
 
 				$e_options = array(
 					'location' => $this->get('location'),
@@ -644,13 +646,15 @@
 					$embed = $driver->getEmbedCode($data, $e_options);
 				}
 
-				$res_container->setValue("<div>$embed</div>");
+				$res_container->setValue("<span>$embed</span>");
 
-				$res_container->appendChild($change);
-				$res_container->appendChild($or);
-				$res_container->appendChild($remove);
+				$controls->appendChild($change);
+				$controls->appendChild($or);
+				$controls->appendChild($remove);
 
-				$label->appendChild($res_container);
+				$res_container->appendChild($controls);
+
+				$wrapper->appendChild($res_container);
 			}
 
 
@@ -663,8 +667,8 @@
 				$label = Widget::Error($label, $flagWithError);
 			}
 
-			$wrapper->appendChild($label);
-			$wrapper->appendChild($url);
+			$wrapper->prependChild($url);
+			$wrapper->prependChild($label);
 
 		}
 
