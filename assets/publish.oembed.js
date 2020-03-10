@@ -24,7 +24,7 @@
 			var t = $(this);
 			var container = t.parent();
 			var input = $('input[name^=fields].irrelevant', container);
-			var change = $('a.change', container);
+			var change = $('.change', container);
 
 			function switchToEdit() {
 				input.removeClass('irrelevant');
